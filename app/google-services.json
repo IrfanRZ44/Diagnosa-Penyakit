@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "824386014903",
+    "firebase_url": "https://diagnosapenyakit-dab80.firebaseio.com",
+    "project_id": "diagnosapenyakit-dab80",
+    "storage_bucket": "diagnosapenyakit-dab80.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:824386014903:android:5c7e85441ba6302b1d0732",
+        "android_client_info": {
+          "package_name": "com.exomatik.diagnosapenyakit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "824386014903-slubbeblq5ap2cta94l51k61mdi0prga.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.exomatik.diagnosapenyakit",
+            "certificate_hash": "fe275d47a55c0c14e1e8d99beb940a06fc301863"
+          }
+        },
+        {
+          "client_id": "824386014903-2iiocvl8tas8v95riss3u8gp1r86ccss.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYPUg-b3CYOXR-8kewgBLyLkXEHejyXho"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "824386014903-2iiocvl8tas8v95riss3u8gp1r86ccss.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav"
+    android:label="Authentication"
+    tools:showIn="navigation_view"
+    app:startDestination="@id/splashFragment">
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.exomatik.diagnosapenyakit.ui.splash.SplashFragment"
+        android:label="@string/splash_screen"
+        tools:layout="@layout/fragment_splash" >
+    </fragment>
+    <fragment
+        android:id="@+id/landingFragment"
+        android:name="com.exomatik.diagnosapenyakit.ui.landing.LandingFragment"
+        android:label="@string/landing"
+        tools:layout="@layout/fragment_landing" />
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.exomatik.diagnosapenyakit.ui.register.RegisterFragment"
+        android:label="@string/daftar"
+        tools:layout="@layout/fragment_register" />
+    <fragment
+        android:id="@+id/mainUserFragment"
+        android:name="com.exomatik.diagnosapenyakit.ui.mainUser.MainUserFragment"
+        android:label="@string/beranda"
+        tools:layout="@layout/fragment_main_user" />
+    <fragment
+        android:id="@+id/mainAdminFragment"
+        android:name="com.exomatik.diagnosapenyakit.ui.mainAdmin.MainAdminFragment"
+        android:label="@string/beranda"
+        tools:layout="@layout/fragment_main_admin" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.exomatik.diagnosapenyakit.ui.login.LoginFragment"
+        android:label="@string/login"
+        tools:layout="@layout/fragment_login" />
+    <fragment
+        android:id="@+id/tambahPenyakitFragment"
+        android:name="com.exomatik.diagnosapenyakit.ui.tambahPenyakit.TambahPenyakitFragment"
+        android:label="@string/tambah_penyakit"
+        tools:layout="@layout/fragment_tambah_penyakit" />
+    <fragment
+        android:id="@+id/listPenyakitFragment"
+        android:name="com.exomatik.diagnosapenyakit.ui.listPenyakit.ListPenyakitFragment"
+        android:label="@string/list_penyakit"
+        tools:layout="@layout/fragment_list_penyakit" />
+    <fragment
+        android:id="@+id/editPenyakitFragment"
+        android:name="com.exomatik.diagnosapenyakit.ui.editPenyakit.EditPenyakitFragment"
+        android:label="@string/edit_penyakit"
+        tools:layout="@layout/fragment_edit_penyakit" />
+    <fragment
+        android:id="@+id/detailPenyakitFragment"
+        android:name="com.exomatik.diagnosapenyakit.ui.detailPenyakit.DetailPenyakitFragment"
+        android:label="@string/mengenal_penyakit"
+        tools:layout="@layout/fragment_detail_penyakit" />
+    <fragment
+        android:id="@+id/questionerFragment"
+        android:name="com.exomatik.diagnosapenyakit.ui.questioner.QuestionerFragment"
+        android:label="@string/questioner"
+        tools:layout="@layout/fragment_question" />
+    <fragment
+        android:id="@+id/hasilDiagnosaFragment"
+        android:name="com.exomatik.diagnosapenyakit.ui.hasilDiagnosa.HasilDiagnosaFragment"
+        android:label="@string/hasil_diagnosa"
+        tools:layout="@layout/fragment_hasil_diagnosa" />
+</navigation>

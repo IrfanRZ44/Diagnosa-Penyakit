@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.exomatik.diagnosapenyakit.ui.landing.LandingFragment">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.exomatik.diagnosapenyakit.ui.landing.LandingViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/blue6">
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/logo"
+            android:layout_width="@dimen/_170"
+            android:layout_height="@dimen/_170"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_40"
+            android:layout_marginBottom="@dimen/h2"
+            android:background="@android:color/transparent"
+            android:padding="@dimen/h2"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_logo" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textBalligh"
+            style="@style/textStandardWhite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/logo"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/roboto_regular"
+            android:text="@string/app_name"
+            android:textColor="@color/gray3"
+            android:textAllCaps="false"
+            android:textSize="30sp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textWelcome"
+            style="@style/textStandardWhite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textBalligh"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_30"
+            android:text="@string/selamat_datang"
+            android:textColor="@color/gray3"
+            android:textSize="@dimen/text_h4"
+            android:textStyle="bold" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnLogin"
+            style="@style/CustomButtonOutlineBlue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textWelcome"
+            android:layout_marginLeft="@dimen/h5"
+            android:layout_marginTop="@dimen/_40"
+            android:layout_marginRight="@dimen/h5"
+            android:fontFamily="@font/roboto_regular"
+            android:padding="@dimen/h3"
+            android:text="@string/login"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/text_h2"
+            android:onClick="@{()-> viewModel.buttonLogin()}"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            style="@style/buttonStandardBlue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btnLogin"
+            android:layout_margin="@dimen/h5"
+            android:layout_marginTop="@dimen/h5"
+            android:fontFamily="@font/roboto_regular"
+            android:padding="@dimen/h3"
+            android:text="@string/sign_up"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_h2"
+            android:onClick="@{()-> viewModel.buttonDaftar()}"
+            />
+    </RelativeLayout>
+</layout>
