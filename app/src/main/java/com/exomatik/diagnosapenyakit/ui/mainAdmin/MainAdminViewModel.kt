@@ -16,6 +16,9 @@ import com.exomatik.diagnosapenyakit.utils.Constant
 import com.exomatik.diagnosapenyakit.utils.Constant.referenceHasilDiagnosa
 import com.exomatik.diagnosapenyakit.utils.DataSave
 import com.exomatik.diagnosapenyakit.utils.FirebaseUtils
+import com.exomatik.diagnosapenyakit.utils.showLog
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.OnFailureListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -56,8 +59,10 @@ class MainAdminViewModel(private val navController: NavController,
 
     fun initAdapter() {
         adapterDiagnosa = AdapterListHasilDiagnosa(
-            listDiagnosa
-        ) { dataHasil: ModelHasilDiagnosa, item: View -> getDetailDiagnosa(dataHasil, item) }
+            listDiagnosa,
+            { dataHasil: ModelHasilDiagnosa, item: View -> getDetailDiagnosa(dataHasil, item) },
+            { dataHasil: ModelHasilDiagnosa, position: Int-> alertHapus(dataHasil, position) }
+        )
 
         rcDiagnosa.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
@@ -122,7 +127,8 @@ class MainAdminViewModel(private val navController: NavController,
                     item.namaPenyakit.text = data?.namaPenyakit
                 } else {
                     isShowLoading.value = false
-                    message.value = "Gagal, Username tidak ditemukan"
+                    showLog(dataHasil.idPenyakit)
+                    message.value = "Gagal, Penyakit tidak ditemukan atau data penyakit telah dihapus"
                 }
             }
         }
@@ -162,4 +168,52 @@ class MainAdminViewModel(private val navController: NavController,
             , valueEventListener
         )
     }
+
+    private fun alertHapus(dataHasil: ModelHasilDiagnosa, position: Int){
+        val alert = AlertDialog.Builder(context?:throw Exception("Error, mohon masuk ulang ke aplikasi"))
+        alert.setTitle(Constant.attention)
+        alert.setMessage(Constant.hapusDiagnosa)
+        alert.setPositiveButton(
+            Constant.iya
+        ) { _, _ ->
+            deleteHasil(dataHasil, position)
+        }
+        alert.setNegativeButton(
+            Constant.tidak
+        ) { dialog, _ -> dialog.dismiss() }
+
+        alert.show()
+    }
+
+    private fun deleteHasil(dataHasil: ModelHasilDiagnosa, position: Int){
+        isShowLoading.value = true
+
+        val onCompleteListener =
+            OnCompleteListener<Void> { result ->
+                if (result.isSuccessful) {
+                    isShowLoading.value = false
+                    message.value = "Berhasil menghapus hasil diagnosa"
+                    listDiagnosa.removeAt(position)
+                    adapterDiagnosa.notifyDataSetChanged()
+                } else {
+                    isShowLoading.value = false
+                    message.value = "Gagal menghapus hasil diagnosa"
+                }
+            }
+
+        val onFailureListener = OnFailureListener { result ->
+            isShowLoading.value = false
+            message.value = result.message
+        }
+
+        try {
+            FirebaseUtils.deletePenyakit(
+                dataHasil.idDiagnosa,
+                onCompleteListener, onFailureListener)
+        }catch (e: Exception){
+            message.value = e.message
+            isShowLoading.value = false
+        }
+    }
+
 }

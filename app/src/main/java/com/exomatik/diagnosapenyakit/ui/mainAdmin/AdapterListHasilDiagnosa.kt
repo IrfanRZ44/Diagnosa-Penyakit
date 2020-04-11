@@ -9,14 +9,22 @@ import com.exomatik.diagnosapenyakit.model.ModelHasilDiagnosa
 
 class AdapterListHasilDiagnosa(
     private val listAfiliasi: ArrayList<ModelHasilDiagnosa?>,
-    private val getDetail: (ModelHasilDiagnosa, View) -> Unit
+    private val getDetail: (ModelHasilDiagnosa, View) -> Unit,
+    private val deleteHasil: (ModelHasilDiagnosa, Int) -> Unit
 ) : RecyclerView.Adapter<AdapterListHasilDiagnosa.AfiliasiHolder>() {
 
     inner class AfiliasiHolder(private val itemAfiliasi: View) :
         RecyclerView.ViewHolder(itemAfiliasi) {
 
-        fun bindAfiliasi(dataJadwal: ModelHasilDiagnosa) {
-            getDetail(dataJadwal, itemAfiliasi)
+        fun bindAfiliasi(dataDiagnosa: ModelHasilDiagnosa,
+                         deleteHasil: (ModelHasilDiagnosa, Int) -> Unit,
+                         position: Int) {
+            getDetail(dataDiagnosa, itemAfiliasi)
+
+            itemAfiliasi.setOnLongClickListener {
+                deleteHasil(dataDiagnosa, position)
+                true
+            }
         }
     }
 
@@ -32,6 +40,6 @@ class AdapterListHasilDiagnosa(
 
     override fun getItemCount(): Int = listAfiliasi.size
     override fun onBindViewHolder(holder: AfiliasiHolder, position: Int) {
-        listAfiliasi[position]?.let { holder.bindAfiliasi(it) }
+        listAfiliasi[position]?.let { holder.bindAfiliasi(it, deleteHasil, position) }
     }
 }

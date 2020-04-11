@@ -9,6 +9,7 @@ object Constant {
     val attention = "Perhatian"
     val logout = "Apakah Anda yakin ingin keluar dari akun?"
     val hapusPenyakit = "Apakah Anda yakin ingin menghapus penyakit ini?"
+    val hapusDiagnosa = "Apakah Anda yakin ingin menghapus hasil diagnosa ini?"
 
     val iya = "Iya"
     val tidak = "Tidak"
