@@ -8,6 +8,7 @@ import androidx.navigation.fragment.findNavController
 import com.exomatik.diagnosapenyakit.R
 import com.exomatik.diagnosapenyakit.base.BaseFragmentBind
 import com.exomatik.diagnosapenyakit.databinding.FragmentMainAdminBinding
+import com.exomatik.diagnosapenyakit.utils.showLog
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainAdminFragment : BaseFragmentBind<FragmentMainAdminBinding>(){
@@ -21,9 +22,23 @@ class MainAdminFragment : BaseFragmentBind<FragmentMainAdminBinding>(){
         viewModel.initAdapter()
         viewModel.getListDiagnosa()
 
+        if (bind.swipeRefresh.isRefreshing) {
+            bind.swipeRefresh.isRefreshing = false
+        }
+
         activity?.toolbar?.visibility = View.VISIBLE
         activity?.toolbar?.title = "Admin"
         setHasOptionsMenu(true)
+        onClick()
+    }
+
+    private fun onClick() {
+        bind.swipeRefresh.setOnRefreshListener {
+            viewModel.getListDiagnosa()
+            if (bind.swipeRefresh.isRefreshing) {
+                bind.swipeRefresh.isRefreshing = false
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

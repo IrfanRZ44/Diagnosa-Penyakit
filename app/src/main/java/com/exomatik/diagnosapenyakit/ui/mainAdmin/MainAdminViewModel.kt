@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.view.View
 import androidx.appcompat.app.AlertDialog
+import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -31,6 +32,7 @@ class MainAdminViewModel(private val navController: NavController,
                          private val rcDiagnosa: RecyclerView) : BaseViewModel(){
     private val listDiagnosa = ArrayList<ModelHasilDiagnosa?>()
     private lateinit var adapterDiagnosa: AdapterListHasilDiagnosa
+    val status = MutableLiveData<String>()
 
     fun alertLogout() {
         val alert = AlertDialog.Builder(context?:throw Exception("Error, mohon masuk ulang ke aplikasi"))
@@ -64,8 +66,7 @@ class MainAdminViewModel(private val navController: NavController,
             { dataHasil: ModelHasilDiagnosa, position: Int-> alertHapus(dataHasil, position) }
         )
 
-        rcDiagnosa.layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        rcDiagnosa.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         rcDiagnosa.adapter = adapterDiagnosa
         rcDiagnosa.isNestedScrollingEnabled = false
     }
@@ -141,11 +142,16 @@ class MainAdminViewModel(private val navController: NavController,
     }
 
     fun getListDiagnosa(){
+        listDiagnosa.clear()
+        adapterDiagnosa.notifyDataSetChanged()
         isShowLoading.value = true
+        status.value = ""
+
         val valueEventListener = object : ValueEventListener {
             override fun onCancelled(result: DatabaseError) {
                 isShowLoading.value = false
                 message.value = "Error, ${result.message}"
+                status.value = "Error, ${result.message}"
             }
 
             override fun onDataChange(result: DataSnapshot) {
@@ -159,7 +165,9 @@ class MainAdminViewModel(private val navController: NavController,
                 } else {
                     isShowLoading.value = false
                     message.value = "Belum ada data hasil diagnosa"
+                    status.value = "Belum ada data hasil diagnosa"
                 }
+                showLog("size ${listDiagnosa.size}")
             }
         }
 
@@ -207,7 +215,8 @@ class MainAdminViewModel(private val navController: NavController,
         }
 
         try {
-            FirebaseUtils.deletePenyakit(
+            FirebaseUtils.deleteChild(
+                referenceHasilDiagnosa,
                 dataHasil.idDiagnosa,
                 onCompleteListener, onFailureListener)
         }catch (e: Exception){

@@ -62,6 +62,8 @@ class ListPenyakitViewModel(private val rcPenyakit: RecyclerView,
     }
 
     fun getListPenyakit(){
+        listPenyakit.clear()
+        adapterPenyakit.notifyDataSetChanged()
         isShowLoading.value = true
         val valueEventListener = object : ValueEventListener {
             override fun onCancelled(result: DatabaseError) {

@@ -24,6 +24,21 @@ class ListPenyakitFragment : BaseFragmentBind<FragmentListPenyakitBinding>(){
         setHasOptionsMenu(true)
         viewModel.initAdapter()
         viewModel.getListPenyakit()
+
+        if (bind.swipeRefresh.isRefreshing) {
+            bind.swipeRefresh.isRefreshing = false
+        }
+
+        onClick()
+    }
+
+    private fun onClick() {
+        bind.swipeRefresh.setOnRefreshListener {
+            viewModel.getListPenyakit()
+            if (bind.swipeRefresh.isRefreshing) {
+                bind.swipeRefresh.isRefreshing = false
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

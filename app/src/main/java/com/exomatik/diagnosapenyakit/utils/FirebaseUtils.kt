@@ -63,12 +63,12 @@ object FirebaseUtils {
             .addOnFailureListener(onFailureListener)
     }
 
-    fun deletePenyakit(idPenyakit: String
+    fun deleteChild(reference: String, idPenyakit: String
                        , onCompleteListener: OnCompleteListener<Void>
                        , onFailureListener: OnFailureListener
     ) {
         database = FirebaseDatabase.getInstance()
-        database.getReference(referencePenyakit)
+        database.getReference(reference)
             .child(idPenyakit)
             .removeValue()
             .addOnCompleteListener(onCompleteListener)

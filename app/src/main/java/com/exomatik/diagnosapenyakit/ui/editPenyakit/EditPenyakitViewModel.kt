@@ -146,8 +146,11 @@ class EditPenyakitViewModel(private val navController: NavController,
         }
 
         try {
-            FirebaseUtils.deletePenyakit(dataPenyakit?.idPenyakit?:throw Exception("Error, gagal menghapus penyakit"),
-                onCompleteListener, onFailureListener)
+            FirebaseUtils.deleteChild(
+                Constant.referencePenyakit,
+                dataPenyakit?.idPenyakit?:throw Exception("Error, gagal menghapus penyakit"),
+                onCompleteListener,
+                onFailureListener)
         }catch (e: Exception){
             message.value = e.message
             isShowLoading.value = false
