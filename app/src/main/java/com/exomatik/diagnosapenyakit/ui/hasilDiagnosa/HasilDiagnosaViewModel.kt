@@ -27,25 +27,25 @@ class HasilDiagnosaViewModel(private val savedData: DataSave,
     }
     fun setData(){
         nama.value = "Nama : ${savedData.getDataUser()?.nama}"
-        jenisKelamin.value = "Nama : ${savedData.getDataUser()?.jk}"
-        tempatLahir.value = "Nama : ${savedData.getDataUser()?.tempatLahir}"
-        tanggalLahir.value = "Nama : ${savedData.getDataUser()?.tanggalLahir}"
-        alamat.value = "Nama : ${savedData.getDataUser()?.alamat}"
+        jenisKelamin.value = "Jenis Kelamin : ${savedData.getDataUser()?.jk}"
+        tempatLahir.value = "Tempat Lahir : ${savedData.getDataUser()?.tempatLahir}"
+        tanggalLahir.value = "Tanggal Lahir : ${savedData.getDataUser()?.tanggalLahir}"
+        alamat.value = "Alamat : ${savedData.getDataUser()?.alamat}"
     }
 
     private fun setInfo(nilaiDiagnosa: Int) {
         when (nilaiDiagnosa) {
             in 75..100 -> {
-                status.value = "Hasil diagnosa kami, Anda 75 % terkena penyakit ${dataPenyakit?.namaPenyakit}"
-                hasilDiagnosa.value = dataPenyakit?.hasilDiagnosa1
+                status.value = "Hasil diagnosa kami, Anda $nilaiDiagnosa % terkena penyakit ${dataPenyakit?.namaPenyakit}"
+                hasilDiagnosa.value = dataPenyakit?.hasilDiagnosa3
             }
             in 50..69 -> {
-                status.value = "Hasil diagnosa kami, Anda 50% terkena penyakit ${dataPenyakit?.namaPenyakit}"
+                status.value = "Hasil diagnosa kami, Anda $nilaiDiagnosa % terkena penyakit ${dataPenyakit?.namaPenyakit}"
                 hasilDiagnosa.value = dataPenyakit?.hasilDiagnosa2
             }
             in 0..49 -> {
                 status.value = "Hasil diagnosa kami, Anda kurang dari 50 % terkena penyakit ${dataPenyakit?.namaPenyakit}"
-                hasilDiagnosa.value = dataPenyakit?.hasilDiagnosa3
+                hasilDiagnosa.value = dataPenyakit?.hasilDiagnosa1
             }
         }
     }
